@@ -1,0 +1,5 @@
+{
+  "latency":    {"host": "localhost", "port": 8081},
+  "traceroute": {"host": "localhost", "port": 8082},
+  "lossjitter": {"host": "localhost", "port": 8083}
+}

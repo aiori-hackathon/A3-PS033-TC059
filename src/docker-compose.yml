@@ -1,0 +1,14 @@
+# Services only for now. Student A adds the DNS server and resolver to this file.
+services:
+  latency:
+    build: ./services
+    environment: {SERVICE: latency, PORT: "8081", TOKEN: "${TOKEN}"}
+    ports: ["8081:8081"]
+  traceroute:
+    build: ./services
+    environment: {SERVICE: traceroute, PORT: "8082", TOKEN: "${TOKEN}"}
+    ports: ["8082:8082"]
+  lossjitter:
+    build: ./services
+    environment: {SERVICE: lossjitter, PORT: "8083", TOKEN: "${TOKEN}"}
+    ports: ["8083:8083"]
