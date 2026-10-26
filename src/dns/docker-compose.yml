@@ -1,0 +1,38 @@
+services:
+  bind:
+    platform: linux/amd64
+    image: internetsystemsconsortium/bind9:9.20
+    container_name: lab-bind
+    restart: unless-stopped
+    ports:
+      - "5300:53/udp"
+      - "5300:53/tcp"
+    volumes:
+      - ./config/named.conf:/etc/bind/named.conf:ro
+      - ./zones:/etc/bind/zones
+      - ./data:/var/cache/bind
+    networks:
+      labnet:
+        ipv4_address: 172.28.0.10
+
+  unbound:
+    image: mvance/unbound:latest
+    container_name: lab-unbound
+    restart: unless-stopped
+    ports:
+      - "5301:53/udp"
+      - "5301:53/tcp"
+    volumes:
+      - ./unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro
+      - ./unbound/lab.test.key:/opt/unbound/etc/unbound/lab.test.key:ro
+    networks:
+      labnet:
+        ipv4_address: 172.28.0.11
+    depends_on:
+      - bind
+
+networks:
+  labnet:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24

@@ -1,0 +1,10 @@
+$TTL 300
+@   IN SOA ns1.lab.test. admin.lab.test. (
+        2026102501 ; serial
+        3600 900 604800 300 )
+    IN NS  ns1.lab.test.
+
+ns1         IN A 127.0.0.1
+latency     IN A 127.0.0.1
+traceroute  IN A 127.0.0.1
+lossjitter  IN A 127.0.0.1

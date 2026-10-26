@@ -1,0 +1,4 @@
+data/
+zones/*.signed
+zones/*.jnl
+zones/*.jbk
