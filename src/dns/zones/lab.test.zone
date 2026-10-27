@@ -1,6 +1,6 @@
 $TTL 300
 @   IN SOA ns1.lab.test. admin.lab.test. (
-        2026102501 ; serial
+        2026102701 ; serial
         3600 900 604800 300 )
     IN NS  ns1.lab.test.
 
@@ -8,3 +8,9 @@ ns1         IN A 127.0.0.1
 latency     IN A 127.0.0.1
 traceroute  IN A 127.0.0.1
 lossjitter  IN A 127.0.0.1
+
+latency     IN SVCB 1 . port=8081 ipv4hint=127.0.0.1
+traceroute  IN SVCB 1 . port=8082 ipv4hint=127.0.0.1
+lossjitter  IN SVCB 1 . port=8083 ipv4hint=127.0.0.1
+
+_index._agents IN TXT "{\"services\":[{\"name\":\"latency\",\"host\":\"latency.lab.test\",\"port\":8081},{\"name\":\"traceroute\",\"host\":\"traceroute.lab.test\",\"port\":8082},{\"name\":\"lossjitter\",\"host\":\"lossjitter.lab.test\",\"port\":8083}]}"
