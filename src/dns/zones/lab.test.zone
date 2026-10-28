@@ -1,6 +1,6 @@
 $TTL 300
 @   IN SOA ns1.lab.test. admin.lab.test. (
-        2026102701 ; serial
+        2026102802 ; serial
         3600 900 604800 300 )
     IN NS  ns1.lab.test.
 
@@ -8,9 +8,17 @@ ns1         IN A 127.0.0.1
 latency     IN A 127.0.0.1
 traceroute  IN A 127.0.0.1
 lossjitter  IN A 127.0.0.1
+malformed   IN A 127.0.0.1
 
-latency     IN SVCB 1 . port=8081 ipv4hint=127.0.0.1
-traceroute  IN SVCB 1 . port=8082 ipv4hint=127.0.0.1
-lossjitter  IN SVCB 1 . port=8083 ipv4hint=127.0.0.1
+latency     IN SVCB 1 . port=8081 ipv4hint=127.0.0.1 key65400="f9ae09f2df370aa461cf6ca43410af79fdef6b95c36fc62871d6be1b6b54d250"
+traceroute  IN SVCB 1 . port=8082 ipv4hint=127.0.0.1 key65400="70f25962cbdf846a502088789baba93e7d634073523ec6f3ece3b53c91726550"
+lossjitter  IN SVCB 1 . port=8083 ipv4hint=127.0.0.1 key65400="94d1b0f2a170a60c3dc4fded632f4822023d7abc68453295391803f21ffba9ee"
+
+; malformed case: correctly signed, but no port
+malformed   IN SVCB 1 . ipv4hint=127.0.0.1
+
+; bogus case: delegation with a DS that matches no real key
+bogus       IN NS ns1.lab.test.
+bogus       IN DS 12345 13 2 0000000000000000000000000000000000000000000000000000000000000000
 
 _index._agents IN TXT "{\"services\":[{\"name\":\"latency\",\"host\":\"latency.lab.test\",\"port\":8081},{\"name\":\"traceroute\",\"host\":\"traceroute.lab.test\",\"port\":8082},{\"name\":\"lossjitter\",\"host\":\"lossjitter.lab.test\",\"port\":8083}]}"

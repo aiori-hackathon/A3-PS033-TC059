@@ -1,0 +1,7 @@
+$TTL 300
+@   IN SOA ns1.lab.test. admin.lab.test. (
+        2026102801 ; serial
+        3600 900 604800 300 )
+    IN NS  ns1.lab.test.
+@   IN A 127.0.0.1
+@   IN SVCB 1 . port=8081 ipv4hint=127.0.0.1
