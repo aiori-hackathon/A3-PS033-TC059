@@ -105,6 +105,9 @@ def live():
     for name in client.SERVICES:
         status, _ = client.run(name)
         out.append((f"live DNS discovery: {name}", "VALID", status))
+    for name, exp in [("bogus", "BOGUS"), ("malformed", "MALFORMED")]:
+        status, _ = client.run(name)
+        out.append((f"live fault zone: {name}", exp, status))
     return out
 
 
